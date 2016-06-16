@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %}确认注册信息{% endblock %}
+
+{% block content %}
+<h1>您还未确认您的注册信息</h1>
+<h2>您还没有收到确认邮件吗？</h2>
+<h3>我等的好无聊啊！</h3>
+
+<a href="{{url_for('auth.resend_confirmation')}}">请再发一次确认邮件给我吧！</a>
+{% endblock %}

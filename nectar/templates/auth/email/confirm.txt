@@ -1,0 +1,12 @@
+亲爱的 {{ user.username }}：
+
+欢迎您使用 Nectar!
+
+为了确认您的账号，请点击下面的链接：
+{{ url_for('auth.confirm', token=token, _external=True) }}
+
+祝您工作愉快！
+
+置辰海信战舰
+
+（注意，本邮件由机器自动发送，请勿回复！）
