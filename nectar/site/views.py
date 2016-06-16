@@ -6,11 +6,11 @@ Routes and views for the flask application.
 from datetime import datetime
 from flask import render_template, request, redirect, url_for
 from flask_login import current_user, login_user, logout_user, login_required
-from . import main
+from . import site
 
 
-@main.route('/')
-@main.route('/index')
+@site.route('/')
+@site.route('/index')
 def home():
     if current_user.is_authenticated:
         return render_template('index.html', title=u'首页',

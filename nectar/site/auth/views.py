@@ -16,7 +16,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-            return redirect(request.args.get('next') or url_for('main.home'))
+            return redirect(request.args.get('next') or url_for('site.home'))
     flash('Invalid username or password.')
     return render_template('auth/login.html', form=form)
 
@@ -26,7 +26,7 @@ def login():
 def logout():
     logout_user()
     flash('You have been logged out.')
-    return redirect(url_for('main.home'))
+    return redirect(url_for('site.home'))
 
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -42,7 +42,7 @@ def register():
         send_email(user.email, u'请激活您的账号', 'auth/email/confirm',
                    user=user, token=token)
         flash(u'一封账号确认邮件已经发送到您提供的邮箱.')
-        return redirect(url_for('main.home'))
+        return redirect(url_for('site.home'))
     return render_template('auth/register.html', form=form)
 
 
@@ -50,12 +50,12 @@ def register():
 @login_required
 def confirm(token):
     if current_user.confirmed:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('site.home'))
     if current_user.confirm(token):
         flash(u'您的账号已经成功确认！')
     else:
         flash('该链接无效或超时!')
-    return redirect(url_for('main.home'))
+    return redirect(url_for('site.home'))
 
 
 @auth.before_app_request
@@ -69,7 +69,7 @@ def before_request():
 @auth.route('/unconfirmed')
 def unconfirmed():
     if current_user.is_anonymous or current_user.confirmed:
-        return redirect('main.home')
+        return redirect('site.home')
     return render_template('auth/unconfirmed.html')
 
 
@@ -80,4 +80,4 @@ def resend_confirmation():
     send_email(current_user.email, u'请激活您的账号', 'auth/email/confirm',
                user=current_user, token=token)
     flash(u'一封账号确认邮件已经发送到您提供的邮箱.')
-    return redirect(url_for('main.home'))
+    return redirect(url_for('site.home'))

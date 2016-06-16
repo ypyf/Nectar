@@ -29,13 +29,13 @@ def create_app(config_name='default'):
     moment.init_app(app)
     login_manager.init_app(app)
 
-    from main import main as main_blueprint
-    app.register_blueprint(main_blueprint)
+    from site import site as site_blueprint
+    app.register_blueprint(site_blueprint)
 
-    from main.auth import auth as auth_blueprint
+    from site.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
-    from main.takeout import takeout as takeout_blueprint
+    from site.takeout import takeout as takeout_blueprint
     app.register_blueprint(takeout_blueprint, url_prefix='/takeout')
 
     return app

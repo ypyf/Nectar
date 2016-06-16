@@ -2,7 +2,7 @@
 """主视图"""
 
 from flask import Blueprint
-main = Blueprint('main', __name__)
+site = Blueprint('site', __name__)
 
 # 这些语句放在最底部，避免循环导入
 from . import views, errors
