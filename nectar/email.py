@@ -2,7 +2,7 @@
 
 from threading import Thread
 from flask import render_template
-from flask.ext.mail import Mail, Message
+from flask_mail import Mail, Message
 from flask import current_app
 from . import mail
 

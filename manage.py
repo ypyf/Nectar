@@ -1,10 +1,10 @@
 # coding=utf-8
 
 import os
+from flask_script import Manager, Shell
+from flask_migrate import Migrate, MigrateCommand
 from nectar import create_app, db
 from nectar.models import User, Role
-from flask.ext.script import Manager, Shell
-from flask.ext.migrate import Migrate, MigrateCommand
 
 app = create_app(os.getenv('NECTAR_CONFIG') or 'default')
 manager = Manager(app)

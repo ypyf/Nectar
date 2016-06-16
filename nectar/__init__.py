@@ -1,11 +1,11 @@
 # coding=utf-8
 
 from flask import Flask, render_template
-from flask.ext.bootstrap import Bootstrap
-from flask.ext.mail import Mail
-from flask.ext.moment import Moment
-from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.login import LoginManager
+from flask_bootstrap import Bootstrap
+from flask_mail import Mail
+from flask_moment import Moment
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
 from config import config
 
@@ -33,5 +33,8 @@ def create_app(config_name='default'):
 
     from main.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
+
+    from main.takeout import takeout as takeout_blueprint
+    app.register_blueprint(takeout_blueprint, url_prefix='/takeout')
 
     return app

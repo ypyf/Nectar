@@ -8,6 +8,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'why would I tell you my secret key?'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
     #NECTAR_MAIL_SUBJECT_PREFIX = '[Nectar]'
     #NECTAR_MAIL_SENDER = 'Nectar Admin <t34@qq.com>'
     #NECTAR_ADMIN = os.environ.get('NECTAR_ADMIN') or 'admin'
@@ -26,7 +27,8 @@ class DevelopmentConfig(Config):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME', '12345')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD', '12345')
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'db/nectar-dev.sqlite')
+        'sqlite:///' + os.path.join(basedir, 'db/nectar-dev.db')
+    print SQLALCHEMY_DATABASE_URI
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
     @staticmethod
@@ -37,11 +39,11 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'db/nectar-test.sqlite')
+        'sqlite:///' + os.path.join(basedir, 'db/nectar-test.db')
 
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'db/nectar.sqlite')
+        'sqlite:///' + os.path.join(basedir, 'db/nectar.db')
 
 # 不同版本的配置
 config = {

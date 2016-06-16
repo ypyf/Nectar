@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
     <link rel="stylesheet" type="text/css" href="/static/content/mystyle.css" />
     <script src="/static/scripts/modernizr-2.6.2.js"></script>
+    {% block head %}
+    {% endblock %}
 </head>
 
 <body>
@@ -24,11 +26,16 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav pull-left">
                     <li><a href="#">用户管理</a></li>
+                    <li><a href="{{ url_for('takeout.wifi') }}">Wi-Fi 数据</a></li>
                     <li><a href="#">关于</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if current_user.is_authenticated %}
-                    <li><a href="{{ url_for('auth.logout') }}">退出</a></li>
+                    <li>
+                        <p class="navbar-text">
+                            {{ current_user.username }} (<a href="{{ url_for('auth.logout') }}">退出</a>)
+                        </p>
+                    </li>
                     {% else %}
                     <li><a href="{{ url_for('auth.login') }}">登录</a></li>
                     {% endif %}
@@ -47,7 +54,7 @@
         </div>
     </div>
 
-    <script src="/static/scripts/jquery-1.10.2.js"></script>
+    <script src="/static/scripts/jquery-3.0.0.min.js"></script>
     <script src="/static/scripts/bootstrap.js"></script>
     <script src="/static/scripts/respond.js"></script>
     {% block scripts %}{% endblock %}

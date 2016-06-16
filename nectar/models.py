@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from flask.ext.login import UserMixin
+from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -54,6 +54,7 @@ class User(UserMixin, db.Model):
             return False
         self.confirmed = True
         db.session.add(self)
+        db.session.commit()
         return True
 
 @login_manager.user_loader

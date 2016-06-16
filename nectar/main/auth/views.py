@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from flask import render_template, redirect, request, url_for, flash
-from flask.ext.login import current_user, login_user, logout_user, login_required
+from flask_login import current_user, login_user, logout_user, login_required
 from . import auth
 from nectar import db
 from nectar.email import send_email
@@ -62,7 +62,7 @@ def before_request():
 
 @auth.route('/unconfirmed')
 def unconfirmed():
-    if current_user.is_anonymous() or current_user.confirmed:
+    if current_user.is_anonymous or current_user.confirmed:
         return redirect('main.home')
     return render_template('auth/unconfirmed.html')
 
