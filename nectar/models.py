@@ -6,6 +6,7 @@ from flask import current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import login_manager, db
 
+
 class Role(db.Model):
     __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
@@ -14,6 +15,7 @@ class Role(db.Model):
 
     def __repr__(self):
         return '<Role %r>' % self.name
+
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -41,7 +43,7 @@ class User(UserMixin, db.Model):
     def generate_confirmation_token(self, expiration=3600):
         """以用户id生成确认token，一个小时后过期"""
         s = Serializer(current_app.config['SECRET_KEY'], expiration)
-        return s.dumps({'confirm':self.id})
+        return s.dumps({'confirm': self.id})
 
     def confirm(self, token):
         s = Serializer(current_app.config['SECRET_KEY'])
@@ -56,6 +58,7 @@ class User(UserMixin, db.Model):
         db.session.add(self)
         db.session.commit()
         return True
+
 
 @login_manager.user_loader
 def load_user(user_id):

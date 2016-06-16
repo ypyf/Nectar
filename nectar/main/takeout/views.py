@@ -9,6 +9,7 @@ from forms import WifiQueryForm
 from nectar.template import templated
 from . import takeout
 
+
 @takeout.route('/wifi', methods=['GET', 'POST'])
 @templated('takeout/wifi.html')
 def wifi():

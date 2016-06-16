@@ -5,17 +5,19 @@ import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'why would I tell you my secret key?'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    #NECTAR_MAIL_SUBJECT_PREFIX = '[Nectar]'
-    #NECTAR_MAIL_SENDER = 'Nectar Admin <t34@qq.com>'
-    #NECTAR_ADMIN = os.environ.get('NECTAR_ADMIN') or 'admin'
+    # NECTAR_MAIL_SUBJECT_PREFIX = '[Nectar]'
+    # NECTAR_MAIL_SENDER = 'Nectar Admin <t34@qq.com>'
+    # NECTAR_ADMIN = os.environ.get('NECTAR_ADMIN') or 'admin'
 
     @staticmethod
     def init_app(app):
         pass
+
 
 class DevelopmentConfig(Config):
     DEBUG = True
@@ -36,10 +38,12 @@ class DevelopmentConfig(Config):
         from datetime import datetime
         app.jinja_env.globals['year'] = datetime.now().year
 
+
 class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'db/nectar-test.db')
+
 
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \

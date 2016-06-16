@@ -3,6 +3,7 @@
 from functools import wraps
 from flask import request, render_template
 
+
 def templated(template=None):
     """模板装饰器"""
     def decorator(f):
