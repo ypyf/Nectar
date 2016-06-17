@@ -14,6 +14,27 @@
     {{ wtf.quick_form(form) }}
 </div>
 
+{% if resultSet is defined %}
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                {% for key in header%}
+                <th>{{key}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for ap in resultSet %}
+            <tr>
+                {% for k in header %}
+                    <td>{{ap[k] | string}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
 {% block scripts %}
 
 <!-- Main -->
