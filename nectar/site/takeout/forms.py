@@ -8,6 +8,5 @@ from nectar.models import User
 
 
 class WifiQueryForm(Form):
-    ssid = StringField(u'SSID', validators=[Required(), Length(1, 64),
-                       Email(u'无效的电子邮件地址')])
+    ssid = StringField(u'SSID', validators=[Required(), Length(1, 64)])
     submit = SubmitField(u'查询')
